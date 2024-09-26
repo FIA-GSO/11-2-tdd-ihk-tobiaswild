@@ -16,12 +16,14 @@ testdata_prozent = [
 
 
 @pytest.mark.parametrize("value, max_value, expected_value", testdata_prozent)
-def test_prozent_berechnen__v0(value: int, max_value: int, expected_value):
-    result = prozent_berechnen(value, max_value)
-
-    if type(expected_value) is not float:
+def test_prozent_berechnen__v0(value, max_value, expected_value):
+    if type(expected_value) is not int:
         with pytest.raises(expected_value):
-            assert True
+            prozent_berechnen(value, max_value)
+
+        return
+
+    result = prozent_berechnen(value, max_value)
 
     assert result == expected_value
 
@@ -46,11 +48,12 @@ testdata_note = [
 
 
 @pytest.mark.parametrize("value, expected_value", testdata_note)
-def test_note_berechnen__v0(value: int, expected_value):
-    result = note_berechnen(value)
-
-    if type(expected_value) is not float:
+def test_note_berechnen__v0(value, expected_value):
+    if type(expected_value) is not str:
         with pytest.raises(expected_value):
-            assert True
+            note_berechnen(value)
+        return
+
+    result = note_berechnen(value)
 
     assert result == expected_value
